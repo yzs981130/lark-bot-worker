@@ -29,14 +29,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Type Check
-        run: pnpm run typeCheck
+#       - name: Type Check
+#         run: pnpm run typeCheck
 
-      - name: Lint
-        run: pnpm run format
+#       - name: Lint
+#         run: pnpm run format
 
-      - name: Test
-        run: pnpm run test
+#       - name: Test
+#         run: pnpm run test
 
       - name: Build
         run: pnpm run build

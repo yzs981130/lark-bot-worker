@@ -94,5 +94,21 @@ export const handleGitlabWebhook = async (
     });
     return resp;
   }
+  else if ("object_kind" in event && event.object_kind === "push") {
+    var push_messages = []
+    event.commits.forEach(function(commit) { 
+        push_messages.push(commit.message.trim() + ` by ${commit.author.name}`);
+    });
+    var messages = push_messages.join('\n');
+    const card = makeInteractiveCard({
+        title: `${event.project.name} 有新的push`,
+        content: `共有 ${event.total_commits_count}条commits\n` + messages,
+    });
+    const resp = await robot.send({
+        msg_type: "interactive",
+        card
+    });
+    return resp;
+    }
   console.error("Unknown event:", event);
 };
